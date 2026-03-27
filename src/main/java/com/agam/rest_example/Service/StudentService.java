@@ -32,4 +32,19 @@ public class StudentService {
         repository.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    // ✅ UPDATE STUDENT
+    public Student updateStudent(int id, Student student) {
+
+        Student existingStudent = repository.findById(id).orElse(null);
+
+        if (existingStudent != null) {
+            existingStudent.setName(student.getName());
+            existingStudent.setCourse(student.getCourse());
+
+            return repository.save(existingStudent);
+        }
+
+        return null;
+    }
 }
